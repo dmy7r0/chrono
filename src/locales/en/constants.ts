@@ -134,7 +134,7 @@ export const ORDINAL_WORD_DICTIONARY: { [word: string]: number } = {
     "thirty-first": 31,
 };
 
-export const TIME_UNIT_DICTIONARY: { [word: string]: OpUnitType | QUnitType } = {
+export const TIME_UNIT_DICTIONARY: { [word: string]: OpUnitType | QUnitType | "bd" } = {
     s: "second",
     sec: "second",
     second: "second",
@@ -166,6 +166,8 @@ export const TIME_UNIT_DICTIONARY: { [word: string]: OpUnitType | QUnitType } = 
     yr: "year",
     year: "year",
     years: "year",
+    "business day": "bd",
+    "business days": "bd",
 };
 
 //-----------------------------
