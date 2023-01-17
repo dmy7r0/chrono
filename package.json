@@ -56,7 +56,8 @@
     "coveralls": "npm run test && cat coverage/lcov.info | coveralls"
   },
   "dependencies": {
-    "dayjs": "^1.10.0"
+    "dayjs": "^1.10.0",
+    "dayjs-business-time": "^1.0.4"
   },
   "eslintConfig": {
     "env": {

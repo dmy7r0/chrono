@@ -1,3 +1,6 @@
+import dayjs from "dayjs";
+import dayjsBusinessTime from "dayjs-business-time";
+
 import { DebugHandler, DebugConsume } from "./debugging";
 import * as en from "./locales/en";
 import { Chrono, Parser, Refiner } from "./chrono";
@@ -142,4 +145,19 @@ export function parse(text: string, ref?: ParsingReference | Date, option?: Pars
  */
 export function parseDate(text: string, ref?: ParsingReference | Date, option?: ParsingOption): Date {
     return casual.parseDate(text, ref, option);
+}
+
+/**
+ * A shortcut to update business hours and holidays.
+ *
+ * By default, Business Times are Monday-Friday, 9am - 5pm, but feel free to setup as many Business Segments you want in a day. Example: https://github.com/rankmyapp/dayjs-business-time#setting-business-times
+ *
+ * By default, holidays are empty!
+ *
+ */
+dayjs.extend(dayjsBusinessTime);
+
+export function setBusinessHoursAndHolidays(workingHours?: dayjs.BusinessHoursMap, holidays?: string[]) {
+    workingHours && dayjs.setBusinessTime(workingHours);
+    holidays && dayjs.setHolidays(holidays);
 }
