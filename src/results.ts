@@ -187,15 +187,25 @@ export class ParsingComponents implements ParsedComponents {
 
     static createRelativeFromReference(
         reference: ReferenceWithTimezone,
-        fragments: { [c in QUnitType]?: number }
+        fragments: { [c in QUnitType & "bd"]?: number }
     ): ParsingComponents {
         let date = dayjs(reference.instant);
         for (const key in fragments) {
-            date = date.add(fragments[key as QUnitType], key as QUnitType);
+            if (key === "bd") {
+                const days = fragments["bd"];
+                if (days < 0) {
+                    date = date.subtractBusinessDays(days * -1);
+                } else {
+                    date = date.addBusinessDays(days);
+                }
+                date = date.isHoliday() ? date.nextBusinessDay() : date;
+            } else {
+                date = date.add(fragments[key as QUnitType], key as QUnitType);
+            }
         }
 
         const components = new ParsingComponents(reference);
-        if (fragments["hour"] || fragments["minute"] || fragments["second"]) {
+        if (fragments["hour"] || fragments["minute"] || fragments["second"] || fragments["bd"]) {
             assignSimilarTime(components, date);
             assignSimilarDate(components, date);
             if (reference.timezoneOffset !== null) {
