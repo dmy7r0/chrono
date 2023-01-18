@@ -30,7 +30,7 @@ test("Test - in X business day", function () {
     });
 });
 
-test("Test - in next 2 business days", function () {
+test("Test - in next X business days", function () {
     testSingleCase(chrono.casual, "in next 2 business days", testDate, (result) => {
         expect(result.text).toBe("next 2 business days");
 
