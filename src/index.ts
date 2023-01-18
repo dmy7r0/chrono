@@ -157,7 +157,9 @@ export function parseDate(text: string, ref?: ParsingReference | Date, option?: 
  */
 dayjs.extend(dayjsBusinessTime);
 
-export function setBusinessHoursAndHolidays(workingHours?: dayjs.BusinessHoursMap, holidays?: string[]) {
+export type BusinessHoursMap = dayjs.BusinessHoursMap;
+
+export function setBusinessHoursAndHolidays(workingHours?: BusinessHoursMap, holidays?: string[]) {
     workingHours && dayjs.setBusinessTime(workingHours);
     holidays && dayjs.setHolidays(holidays);
 }
